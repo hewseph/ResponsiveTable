@@ -30,17 +30,17 @@ function App() {
       <Header>
         <strong>IBAN</strong>
       </Header>
-      {data.map((tr, r) => (<TableRow key={`row${r}`} tr={tr} />))}
+      {data.map((tr, r) => (<TableRow secondary={r % 2 === 0} key={`row${r}`} tr={tr} />))}
     </Table>
   )
 }
 
-const TableRow = ({ tr }) => {
+const TableRow = ({ tr, secondary, tertiary }) => {
   const [collapsed, setCollapsed] = useState(true)
   return (
     <>
       {tr.map(td => (
-        <Cell onClick={() => setCollapsed(!collapsed)} key={td}>{td}</Cell>
+        <Cell secondary={secondary} tertiary={!collapsed} onClick={() => setCollapsed(!collapsed)} key={td}>{td}</Cell>
       ))}
       <RowDetails duration={250} height={250} collapsed={collapsed}>
         <Stuff>
@@ -81,12 +81,19 @@ const Table = styled.span({
     `
 })
 
-const Cell = styled.span`
-  padding: 8px 4px;
-  border-left: 1px solid black;
-  border-bottom: 1px solid black;
-  cursor: pointer;
-`
+const Cell = styled.span(props => ({
+  backgroundColor: "white",
+  padding: "8px 4px",
+  borderLeft: "1px solid black",
+  borderBottom: "1px solid black",
+  cursor: "pointer",
+  ...(props.secondary ? {
+    backgroundColor: "lightgrey"
+  } : {}),
+  ...(props.tertiary ? {
+    backgroundColor: "#cf7e7e"
+  } : {})
+}))
 
 const Stuff = styled.div({
   padding: "100px"
