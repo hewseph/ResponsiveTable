@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import './App.css';
 import { data, headers } from './data'
 import styled from 'styled-components'
@@ -52,26 +52,30 @@ function App() {
 
 const TableRow = ({ tr, secondary, rowDetails, toggleRowDetails }) => {
   const [showLogs, setShowLogs] = useState(false)
+  useEffect(() => {
+	  if (!rowDetails)
+		  setShowLogs(false)
+  }, [rowDetails])
   return (
     <>
       {tr.map(td => (
         <Cell secondary={secondary} tertiary={rowDetails} onClick={() => toggleRowDetails()} key={td}>{td}</Cell>
       ))}
-      <RowDetails duration={350} height={showLogs ? 400 : 110} collapsed={!rowDetails}>
+      <RowDetails duration={350} height={showLogs ? 340 : 80} collapsed={!rowDetails}>
         <SpecialCell color="gray">{tr[0]}</SpecialCell>
         <SpecialCell color="gray">{tr[1]}</SpecialCell>
-        <SpecialCell color="gray">{tr[2]}</SpecialCell>
+        <SpecialCell color="gray">{tr[2]}{tr[4] == "Available" ? <button>Edit</button> : ""}</SpecialCell>
         <SpecialCell color="gray">{tr[3]}</SpecialCell>
         <SpecialCell color="gray">{tr[4]}</SpecialCell>
-        <SpecialCell color="gray">Current Date and Time</SpecialCell>
+        <SpecialCell color="gray">Current Time</SpecialCell>
         <SpecialCell color="gray"><button>Facility Transfer</button></SpecialCell>
         <SpecialCell color="gray" styles={{
           display: "grid",
           gridTemplateColumns: `1fr 1fr 1fr`
         }}>
-          <button>Facility Transfer</button>
-          <button>Facility Transfer</button>
-          <button>Facility Transfer</button>
+          <button>Save</button>
+          <button>Clear</button>
+          <button>Cancel</button>
         </SpecialCell>
         <SpecialCell color="gray" styles={{ textAlign: "right" }}>
           <button onClick={() => setShowLogs(!showLogs)} style={{ margin: "auto" }}>{showLogs ? "Hide Logs" : "View Logs"}</button>
