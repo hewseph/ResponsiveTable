@@ -11,10 +11,10 @@ export const headers =
 export const data = [
   [
     "Q5QN6P44",
-    "hhfvh",
+    "",
     "5418",
     "DaVinci User",
-    "Assigned Auction",
+    "Available",
     "01/18/2022 21:42:35",
     "Facility 01",
   ],
