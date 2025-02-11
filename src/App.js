@@ -53,8 +53,8 @@ function App() {
 const TableRow = ({ tr, secondary, rowDetails, toggleRowDetails }) => {
   const [showLogs, setShowLogs] = useState(false)
   useEffect(() => {
-	  if (!rowDetails)
-		  setShowLogs(false)
+    if (!rowDetails)
+      setShowLogs(false)
   }, [rowDetails])
   return (
     <>
@@ -98,9 +98,6 @@ const TableRow = ({ tr, secondary, rowDetails, toggleRowDetails }) => {
             </SpecialCell>
           </>
         ))}
-        <Stuff>
-          DO STUFF HERE
-        </Stuff>
       </RowDetails>
     </>
   )
